@@ -78,6 +78,7 @@ export class PlayerComponent implements OnInit {
 
   videoPlay(): void {
     this.videoRef.nativeElement.play();
+    this.videoService.addHistory(this.video.id).subscribe();
   }
 
   videoPause(): void {
@@ -99,6 +100,7 @@ export class PlayerComponent implements OnInit {
   videoRefresh(): void {
     this.videoRef.nativeElement.load();
     this.videoRef.nativeElement.play();
+    this.videoService.addHistory(this.video.id).subscribe();
   }
   videoMuted(): void {
     if (this.videoRef.nativeElement.muted) {

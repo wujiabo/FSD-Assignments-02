@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Video } from './video';
+import { History } from './history';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -108,5 +109,24 @@ export class VideoService {
     };
   }
   private log(message: string) {
+  }
+
+
+  getHistories(): Observable<number[]> {
+    return this.http.get<number[]>('http://localhost:3000/histories')
+      .pipe(
+        tap(_ => this.log('fetched histories')),
+        catchError(this.handleError<number[]>('getHistories', []))
+      );
+  }
+
+  addHistory(id: number): Observable<History> {
+    const history = new History();
+    history.videoId = id;
+    history.createTime = new Date();
+    return this.http.post<History>('http://localhost:3000/histories', history, httpOptions).pipe(
+      tap((newHistory: History) => this.log(`added history w/ id=${newHistory.videoId}`)),
+      catchError(this.handleError<History>('addHistory'))
+    );
   }
 }
