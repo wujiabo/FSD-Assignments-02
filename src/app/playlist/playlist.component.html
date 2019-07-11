@@ -2,7 +2,7 @@
     <tbody>
         <tr *ngFor="let video of videos">
             <td>
-                <a href="#" (click)="onSelect(video)">{{ video.title }}</a>
+                {{video.id==currentVideoId?'*':''}}<a href="#" (click)="onSelect(video)">{{ video.title }}</a>
             </td>
         </tr>
     </tbody>

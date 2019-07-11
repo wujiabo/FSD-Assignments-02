@@ -112,11 +112,11 @@ export class VideoService {
   }
 
 
-  getHistories(): Observable<number[]> {
-    return this.http.get<number[]>('http://localhost:3000/histories')
+  getHistories(): Observable<History[]> {
+    return this.http.get<History[]>('http://localhost:3000/histories')
       .pipe(
         tap(_ => this.log('fetched histories')),
-        catchError(this.handleError<number[]>('getHistories', []))
+        catchError(this.handleError<History[]>('getHistories', []))
       );
   }
 
