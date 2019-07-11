@@ -1,3 +1,4 @@
+<p><ngb-progressbar type="success" [value]="percent" [striped]="true" [animated]="true"><i>{{percent}}%</i></ngb-progressbar></p>
 <div class="btn-group">
     <button type="button" class="btn btn-primary" [disabled]="isPlay||noVideo" (click)="play(); ">
         play
@@ -24,4 +25,3 @@
         thumbs down {{video.unlikes}}
     </button>
 </div>
-{{percent}}
