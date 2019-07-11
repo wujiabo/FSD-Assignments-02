@@ -1,26 +1,26 @@
 <div class="btn-group">
-    <button type="button" class="btn btn-primary" (click)="play(); ">
+    <button type="button" class="btn btn-primary" [disabled]="isPlay||noVideo" (click)="play(); ">
         play
     </button>
-    <button type="button" class="btn btn-primary" (click)="pause(); ">
+    <button type="button" class="btn btn-primary" [disabled]="!isPlay||noVideo" (click)="pause(); ">
         pause
     </button>
-    <button type="button" class="btn btn-primary" (click)="plus(); ">
+    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="plus(); ">
         plus
     </button>
-    <button type="button" class="btn btn-primary" (click)="minus(); ">
+    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="minus(); ">
         minus
     </button>
-    <button type="button" class="btn btn-primary" (click)="refresh(); ">
+    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="refresh(); ">
         refresh
     </button>
-    <button type="button" class="btn btn-primary" (click)="muted(); ">
-        muted
+    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="muted(); ">
+        {{isMuted?'unmuted':'muted'}}
     </button>
-    <button type="button" class="btn btn-primary" (click)="thumbsUp(); ">
-        thumbs up
+    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="thumbsUp(); ">
+        thumbs up {{video.likes}}
     </button>
-    <button type="button" class="btn btn-primary" (click)="thumbsDown(); ">
-        thumbs down
+    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="thumbsDown(); ">
+        thumbs down {{video.unlikes}}
     </button>
 </div>

@@ -5,15 +5,13 @@ import { Video } from './video';
 @Injectable({
   providedIn: 'root'
 })
-export class InMemoryDataService implements InMemoryDbService{
+export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const videos = [
-      { id: 1, title: 'MiG-31: The Near-Space Plane.', url: 'https://www.youtube.com/watch?v=h_w_0zUs9ac', approve: 'yes' },
-      { id: 2, title: 'The very Best Smart Watch', url: 'https://www.youtube.com/watch?v=_GpXYRcBZYc', approve: 'yes' },
-      { id: 2, title: 'Chasing 300 - The World’s Fastest Motorcycle', url: 'https://www.youtube.com/watch?v=E8RpedLHvc4', approve: 'yes' },
-      { id: 2, title: '21st Century Hackers - Documentary 2018', url: 'https://www.youtube.com/watch?v=koi54cPRlhQ', approve: 'yes' }
+      { id: 1, title: 'mov01', url: 'http://www.w3school.com.cn/example/html5/mov_bbb.mp4', approve: 'yes', likes: 0, unlikes: 0 },
+      { id: 2, title: 'mov02', url: 'http://www.w3school.com.cn/i/movie.ogg', approve: 'yes', likes: 0, unlikes: 0 }
     ];
-    return {videos};
+    return { videos };
   }
 
   genId(videos: Video[]): number {

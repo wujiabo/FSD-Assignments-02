@@ -3,4 +3,6 @@ export class Video {
     title: string;
     url: string;
     approve: string;
+    likes: number;
+    unlikes: number;
 }

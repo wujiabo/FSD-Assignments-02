@@ -50,7 +50,9 @@ export class AddNewVideoComponent implements OnInit {
       this._warning.next(`Url is not correct.`);
       return;
     }
-    this.videoService.addVideo({ title, url } as Video)
+    const likes = 0;
+    const unlikes = 0;
+    this.videoService.addVideo({ title, url, likes, unlikes } as Video)
       .subscribe(video => {
         this.videos.push(video);
       });

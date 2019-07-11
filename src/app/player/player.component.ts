@@ -12,13 +12,22 @@ export class PlayerComponent implements OnInit {
   video: Video;
   @ViewChild('player', { static: false }) videoRef: ElementRef;
 
-  constructor(private videoService: VideoService,private messageService: MessageService) {
+  constructor(private videoService: VideoService, private messageService: MessageService) {
     this.messageService.getMessage().subscribe(message => {
+      if (message.operate === 'reload') {
+        this.video = new Video();
+        this.video.url = '';
+        this.videoRef.nativeElement.src = this.video.url;
+      }
       if (message.operate === 'video') {
         this.video = message.video;
+        this.videoRef.nativeElement.src = this.video.url;
       }
       if (message.operate === 'play') {
-        this.videoPlayer();
+        this.videoPlay();
+      }
+      if (message.operate === 'pause') {
+        this.videoPause();
       }
     });
   }
@@ -33,7 +42,11 @@ export class PlayerComponent implements OnInit {
     this.video.url = '';
   }
 
-  videoPlayer(): void {
+  videoPlay(): void {
     this.videoRef.nativeElement.play();
+  }
+
+  videoPause(): void {
+    this.videoRef.nativeElement.pause();
   }
 }
