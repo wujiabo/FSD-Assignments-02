@@ -1,3 +1,4 @@
+<ngb-alert *ngIf="warningMessage" type="warning" (close)="warningMessage = null">{{ warningMessage }}</ngb-alert>
 <div class="row">
     <div class="col-md-6">
         <input type="text" class="form-control" #title placeholder="Title">

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 import { Video } from '../video';
 import { VideoService } from '../video.service';
@@ -12,10 +14,16 @@ import { MessageService } from '../message.service';
 export class AddNewVideoComponent implements OnInit {
   videos: Video[];
   selectedVideo: Video;
+  warningMessage: string;
+  private _warning = new Subject<string>();
 
   constructor(private videoService: VideoService, private messageService: MessageService) { }
 
   ngOnInit() {
+    this._warning.subscribe((message) => this.warningMessage = message);
+    this._warning.pipe(
+      debounceTime(3000)
+    ).subscribe(() => this.warningMessage = null);
     this.getVideos();
   }
 
@@ -30,8 +38,18 @@ export class AddNewVideoComponent implements OnInit {
   add(title: string, url: string): void {
     title = title.trim();
     url = url.trim();
-    if (!title) { return; }
-    if (!url) { return; }
+    if (!title) {
+      this._warning.next(`Title is empty.`);
+      return;
+    }
+    if (!url) {
+      this._warning.next(`Url is empty.`);
+      return;
+    }
+    if (!this.isURL(url)) {
+      this._warning.next(`Url is not correct.`);
+      return;
+    }
     this.videoService.addVideo({ title, url } as Video)
       .subscribe(video => {
         this.videos.push(video);
@@ -50,8 +68,18 @@ export class AddNewVideoComponent implements OnInit {
     const title = this.selectedVideo.title;
     const url = this.selectedVideo.url;
     const approve = 'no';
-    if (!title) { return; }
-    if (!url) { return; }
+    if (!title) {
+      this._warning.next(`Title is empty.`);
+      return;
+    }
+    if (!url) {
+      this._warning.next(`Url is empty.`);
+      return;
+    }
+    if (!this.isURL(url)) {
+      this._warning.next(`Url is not correct.`);
+      return;
+    }
     this.videoService.updateVideo({ id, title, url, approve } as Video).subscribe();
     this.getVideos();
     this.selectedVideo = null;
@@ -66,5 +94,15 @@ export class AddNewVideoComponent implements OnInit {
     video.approve = 'yes';
     this.videoService.updateVideo(video).subscribe();
     this.messageService.sendMessage('reload', null);
+  }
+
+  isURL(url: string): boolean {
+    const strRegex = '(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]';
+    const re = new RegExp(strRegex);
+    if (re.test(url)) {
+      return (true);
+    } else {
+      return (false);
+    }
   }
 }
