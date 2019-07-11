@@ -37,9 +37,11 @@ export class ControlsComponent implements OnInit {
 
   play(): void {
     this.messageService.sendMessage('play', null);
+    this.isPlay = true;
   }
   pause(): void {
     this.messageService.sendMessage('pause', null);
+    this.isPlay = false;
   }
   plus(): void {
     this.messageService.sendMessage('plus', null);
@@ -49,6 +51,7 @@ export class ControlsComponent implements OnInit {
   }
   refresh(): void {
     this.messageService.sendMessage('refresh', null);
+    this.isPlay = true;
   }
   muted(): void {
     this.messageService.sendMessage('muted', null);

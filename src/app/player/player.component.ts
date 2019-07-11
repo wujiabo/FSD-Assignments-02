@@ -29,6 +29,24 @@ export class PlayerComponent implements OnInit {
       if (message.operate === 'pause') {
         this.videoPause();
       }
+      if (message.operate === 'plus') {
+        this.videoPlus();
+      }
+      if (message.operate === 'minus') {
+        this.videoMinus();
+      }
+      if (message.operate === 'refresh') {
+        this.videoRefresh();
+      }
+      if (message.operate === 'muted') {
+        this.videoMuted();
+      }
+      if (message.operate === 'thumbsUp') {
+        this.videoThumbsUp();
+      }
+      if (message.operate === 'thumbsDown') {
+        this.videoThumbsDown();
+      }
     });
   }
 
@@ -48,5 +66,38 @@ export class PlayerComponent implements OnInit {
 
   videoPause(): void {
     this.videoRef.nativeElement.pause();
+  }
+
+  videoPlus(): void {
+    if (this.videoRef.nativeElement.volume <= 0.9) {
+      this.videoRef.nativeElement.volume = this.videoRef.nativeElement.volume + 0.1;
+    }
+  }
+
+  videoMinus(): void {
+    if (this.videoRef.nativeElement.volume >= 0.1) {
+      this.videoRef.nativeElement.volume = this.videoRef.nativeElement.volume - 0.1;
+    }
+  }
+
+  videoRefresh(): void {
+    this.videoRef.nativeElement.load();
+    this.videoRef.nativeElement.play();
+  }
+  videoMuted(): void {
+    if (this.videoRef.nativeElement.muted) {
+      this.videoRef.nativeElement.muted = false;
+    } else {
+      this.videoRef.nativeElement.muted = true;
+    }
+  }
+
+  videoThumbsUp(): void {
+    this.video.likes = this.video.likes + 1;
+    this.videoService.updateVideo(this.video).subscribe();
+  }
+  videoThumbsDown(): void {
+    this.video.unlikes = this.video.unlikes + 1;
+    this.videoService.updateVideo(this.video).subscribe();
   }
 }
