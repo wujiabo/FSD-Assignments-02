@@ -55,14 +55,15 @@ export class AddNewVideoComponent implements OnInit {
     this.videoService.addVideo({ title, url, likes, unlikes } as Video)
       .subscribe(video => {
         this.videos.push(video);
+        this.messageService.sendMessage('reload', null);
       });
-    this.messageService.sendMessage('reload', null);
   }
 
   delete(video: Video): void {
     this.videos = this.videos.filter(h => h !== video);
-    this.videoService.deleteVideo(video).subscribe();
-    this.messageService.sendMessage('reload', null);
+    this.videoService.deleteVideo(video).subscribe(res => {
+      this.messageService.sendMessage('reload', null);
+    });
   }
 
   edit(): void {
@@ -82,10 +83,11 @@ export class AddNewVideoComponent implements OnInit {
       this._warning.next(`Url is not correct.`);
       return;
     }
-    this.videoService.updateVideo({ id, title, url, approve } as Video).subscribe();
-    this.getVideos();
-    this.selectedVideo = null;
-    this.messageService.sendMessage('reload', null);
+    this.videoService.updateVideo({ id, title, url, approve } as Video).subscribe(res => {
+      this.getVideos();
+      this.selectedVideo = null;
+      this.messageService.sendMessage('reload', null);
+    });
   }
 
   cancelEdit(): void {
@@ -94,8 +96,9 @@ export class AddNewVideoComponent implements OnInit {
 
   approve(video: Video): void {
     video.approve = 'yes';
-    this.videoService.updateVideo(video).subscribe();
-    this.messageService.sendMessage('reload', null);
+    this.videoService.updateVideo(video).subscribe(res => {
+      this.messageService.sendMessage('reload', null);
+    });
   }
 
   isURL(url: string): boolean {

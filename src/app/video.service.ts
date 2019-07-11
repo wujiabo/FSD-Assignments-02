@@ -11,7 +11,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class VideoService {
-  private videosUrl = 'api/videos';
+  private videosUrl = 'http://localhost:3000/videos';
 
   constructor(private http: HttpClient) { }
 
@@ -82,7 +82,10 @@ export class VideoService {
 
   /** PUT: update the video on the server */
   updateVideo(video: Video): Observable<any> {
-    return this.http.put(this.videosUrl, video, httpOptions).pipe(
+    const id = typeof video === 'number' ? video : video.id;
+    const url = `${this.videosUrl}/${id}`;
+
+    return this.http.put(url, video, httpOptions).pipe(
       tap(_ => this.log(`updated video id=${video.id}`)),
       catchError(this.handleError<any>('updateVideo'))
     );
