@@ -25,7 +25,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/bootstrap.min.css"
+              "src/bootstrap.min.css",
+              "src/css/font-awesome.min.css"
             ],
             "scripts": []
           },
