@@ -1,27 +1,30 @@
-<p><ngb-progressbar type="success" [value]="percent" [striped]="true" [animated]="true"><i>{{percent}}%</i></ngb-progressbar></p>
+<p>
+    <ngb-progressbar type="success" [value]="percent" [striped]="true" [animated]="true"><i>{{percent}}%</i>
+    </ngb-progressbar>
+</p>
 <div class="btn-group">
-    <button type="button" class="btn btn-primary" [disabled]="isPlay||noVideo" (click)="play(); ">
-        play
+    <button type="button" class="btn btn-primary fa fa-play" [disabled]="isPlay||noVideo" (click)="play(); ">
+
     </button>
-    <button type="button" class="btn btn-primary" [disabled]="!isPlay||noVideo" (click)="pause(); ">
-        pause
+    <button type="button" class="btn btn-primary fa fa-pause" [disabled]="!isPlay||noVideo" (click)="pause(); ">
+
     </button>
-    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="plus(); ">
-        plus
+    <button type="button" class="btn btn-primary fa fa-plus" [disabled]="noVideo" (click)="plus(); ">
+
     </button>
-    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="minus(); ">
-        minus
+    <button type="button" class="btn btn-primary fa fa-minus" [disabled]="noVideo" (click)="minus(); ">
+
     </button>
-    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="refresh(); ">
-        refresh
+    <button type="button" class="btn btn-primary fa fa-refresh" [disabled]="noVideo" (click)="refresh(); ">
+
     </button>
-    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="muted(); ">
-        {{isMuted?'unmuted':'muted'}}
+    <button type="button" [class]="isMuted?'btn btn-primary fa fa-volume-off':'btn btn-primary fa fa-volume-up'" [disabled]="noVideo" (click)="muted(); ">
+
     </button>
-    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="thumbsUp(); ">
-        thumbs up {{video.likes}}
+    <button type="button" class="btn btn-primary fa fa-thumbs-up" [disabled]="noVideo" (click)="thumbsUp(); ">
+        {{video.likes}}
     </button>
-    <button type="button" class="btn btn-primary" [disabled]="noVideo" (click)="thumbsDown(); ">
-        thumbs down {{video.unlikes}}
+    <button type="button" class="btn btn-primary fa fa-thumbs-down" [disabled]="noVideo" (click)="thumbsDown(); ">
+        {{video.unlikes}}
     </button>
 </div>
