@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-md-6">
+        <input type="text" class="form-control" #title placeholder="Title">
+        <input type="text" class="form-control" #url placeholder="Youtube URL">
+        <br>
+        <button type="button" class="btn btn-primary"
+            (click)="add(title.value,url.value); title.value='';url.value=''">Add
+            Video</button>
+    </div>
+    <div class="col-md-6" *ngIf="selectedVideo">
+        <input type="text" class="form-control" [(ngModel)]="selectedVideo.title" />
+        <input type="text" class="form-control" [(ngModel)]="selectedVideo.url" />
+        <br>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" (click)="edit(); ">
+                Edit Video
+            </button>
+            <button type="button" class="btn btn-primary" (click)="cancelEdit(); ">
+                Cancel Edit Video
+            </button></div>
+    </div>
+</div>
+<br>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">S.no</th>
+            <th scope="col">Title</th>
+            <th scope="col">URL</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let video of videos; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>
+                {{ video.title }}
+            </td>
+            <td>
+                {{ video.url }}
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="onSelect(video)">Edit</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="delete(video)">Detele</button>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" [disabled]="video.approve=='yes'"
+                    (click)="approve(video)">Approve</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
