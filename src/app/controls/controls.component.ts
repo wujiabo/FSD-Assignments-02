@@ -42,6 +42,7 @@ export class ControlsComponent implements OnInit {
     this.isMuted = false;
     this.video = new Video();
     this.noVideo = true;
+    this.percent = 0;
   }
 
   play(): void {
