@@ -53,7 +53,7 @@ export class VideoService {
       // if not search term, return empty video array.
       return of([]);
     }
-    return this.http.get<Video[]>(`${this.videosUrl}/?name=${term}`).pipe(
+    return this.http.get<Video[]>(`${this.videosUrl}/?title=${term}`).pipe(
       tap(_ => this.log(`found videos matching "${term}"`)),
       catchError(this.handleError<Video[]>('searchVideos', []))
     );
