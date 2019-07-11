@@ -5,4 +5,5 @@ export class Video {
     approve: string;
     likes: number;
     unlikes: number;
+    percent: number;
 }

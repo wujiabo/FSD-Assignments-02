@@ -12,6 +12,7 @@ export class ControlsComponent implements OnInit {
   isMuted: boolean;
   video: Video;
   noVideo: boolean;
+  percent: number;
 
   constructor(private messageService: MessageService) {
     this.messageService.getMessage().subscribe(message => {
@@ -25,6 +26,14 @@ export class ControlsComponent implements OnInit {
         this.video = message.video;
         this.noVideo = false;
       }
+      if (message.operate === 'ended') {
+        this.isPlay = false;
+        this.percent = 0;
+      }
+      if (message.operate === 'percent') {
+        this.percent = message.video.percent;
+      }
+
     });
   }
 

@@ -55,6 +55,22 @@ export class PlayerComponent implements OnInit {
     this.initVideo();
   }
 
+  ngAfterViewInit() {
+    this.videoRef.nativeElement.addEventListener('ended', () => {
+      this.messageService.sendMessage('ended', this.video);
+    });
+    this.videoRef.nativeElement.addEventListener('timeupdate', () => {
+      let pValue: number = 0;
+      if (isNaN(this.videoRef.nativeElement.duration)) {
+        pValue = 0;
+      } else {
+        pValue = Math.round((this.videoRef.nativeElement.currentTime / this.videoRef.nativeElement.duration) * 100);
+      }
+      this.video.percent = pValue;
+      this.messageService.sendMessage('percent', this.video);
+    });
+  }
+
   initVideo(): void {
     this.video = new Video();
     this.video.url = '';
