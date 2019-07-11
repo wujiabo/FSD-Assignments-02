@@ -1,0 +1,31 @@
+{
+  "videos": [
+    {
+      "id": 1,
+      "title": "mov01",
+      "url": "http://www.w3school.com.cn/example/html5/mov_bbb.mp4",
+      "approve": "yes",
+      "likes": 2,
+      "unlikes": 0,
+      "percent": 0
+    },
+    {
+      "id": 2,
+      "title": "mov02",
+      "url": "http://www.w3school.com.cn/i/movie.ogg",
+      "approve": "yes",
+      "likes": 0,
+      "unlikes": 1,
+      "percent": 0
+    },
+    {
+      "title": "ergwr",
+      "url": "http://www.w3school.com.cn/i/movie.ogg",
+      "likes": 3,
+      "unlikes": 1,
+      "id": 3,
+      "approve": "yes",
+      "percent": 100
+    }
+  ]
+}
