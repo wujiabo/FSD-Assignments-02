@@ -25,6 +25,7 @@ export class ControlsComponent implements OnInit {
       if (message.operate === 'video') {
         this.video = message.video;
         this.noVideo = false;
+        this.isPlay = false;
       }
       if (message.operate === 'ended') {
         this.isPlay = false;
